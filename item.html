@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+    <title>Assignment</title>
+</head>
+<body>
+    <div class="container">
+        <div class="section" title="header">
+            <h1>Assignment Details</h1>
+            <a class="btn waves-effect waves-light" href="list.html">
+                <i class="material-icons left">arrow_back</i>
+                Return to Assignments
+            </a>
+
+        </div>
+        <div class="section" title="assignment_info">
+            <form>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="titleInput" type="text" class="validate" value="Worksheet" required>
+                        <label for="titleInput">Assignment Title</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="subjectInput" type="text" class="validate" value="Econ" required>
+                        <label for="subjectInput">Subject</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s2">
+                        <input id="priorityInput" type="number" class="validate" value="3" required>
+                        <label for="priorityInput">Priority</label>
+                    </div>
+                    <div class="input-field col s5">
+                        <input id="finishInput" type="date" class="datepicker" value="01/09/23" required>
+                        <label for="finishInput">Finish By</label>
+                    </div>
+                    <div class="input-field col s5">
+                        <input id="dueInput" type="date" class="datepicker" value="01/12/23" required>
+                        <label for="dueInput">Due Date</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="descriptionInput" type="text" class="validate" value="Chapter 17 worksheet on Schoology." required>
+                        <label for="dueInput">Description</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn waves-effect waves-light" type="submit">
+                        <i class="material-icons right">check</i>
+                        Submit Changes
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>
