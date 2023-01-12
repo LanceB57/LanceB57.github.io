@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,8 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/stylesheets/listStyle.css">
+    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico">
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
@@ -14,27 +17,29 @@
     <title>To-Do List</title>
 </head>
 <style>
-    th, td {
+    th,
+    td {
         text-align: center;
     }
 </style>
+
 <body>
     <div class="container">
         <div class="section" id="assignmentList">
-            <h1>To-Do List</h1>  
+            <h1>To-Do List</h1>
             <div class="row">
-                <a class="btn waves-effect waves-light" href="archive.html">
+                <a class="btn waves-effect waves-light" href="/archive">
                     <i class="material-icons right">arrow_forward</i>
                     Go To Archive
                 </a>
-            </div>   
+            </div>
 
             <ul id="sort-dropdown" class="dropdown-content">
                 <li><a href="">Priority</a></li>
                 <li><a href="">Finish By</a></li>
                 <li><a href="">Due Date</a></li>
             </ul>
-            
+
 
             <div class="section" id="assignmentTable">
                 <table>
@@ -47,7 +52,7 @@
                             <th>Finish By</th>
                             <th>Due Date</th>
                             <td text-align="right">
-                                <a class="btn-small dropdown-button" href="#" data-activates="sort-dropdown">
+                                <a class="btn-small dropdown-button" href="" data-activates="sort-dropdown">
                                     <i class="material-icons right">expand_more</i>
                                     Sort By
                                 </a>
@@ -58,7 +63,7 @@
                         <tr>
                             <td>
                                 <label>
-                                    <input type="checkbox" class="filled-in"/>
+                                    <input type="checkbox" class="filled-in" />
                                     <span></span>
                                 </label>
                             </td>
@@ -68,19 +73,19 @@
                             <td>1/9/23</td>
                             <td>1/12/23</td>
                             <td>
-                                <a class="btn-small waves-effect waves-light blue" href="item.html">
+                                <a class="btn-small waves-effect waves-light blue" href="/list/item">
                                     <i class="material-icons right">edit</i>
                                     Info/Edit
                                 </a>
-                                <a class="btn-small waves-effect waves-light green" href="list.html">
+                                <a class="btn-small waves-effect waves-light green" href="/list">
                                     <i class="material-icons right">done</i>
                                     Done
                                 </a>
-                                <a class="btn-small waves-effect waves-light orange" href="list.html">
+                                <a class="btn-small waves-effect waves-light orange" href="/list">
                                     <i class="material-icons right">archive</i>
                                     Archive
                                 </a>
-                                <a class="btn-small waves-effect waves-light red" href="list.html">
+                                <a class="btn-small waves-effect waves-light red" href="/list">
                                     <i class="material-icons">delete</i>
                                 </a>
                             </td>
@@ -88,7 +93,7 @@
                         <tr>
                             <td>
                                 <label>
-                                    <input type="checkbox" class="filled-in"/>
+                                    <input type="checkbox" class="filled-in" />
                                     <span></span>
                                 </label>
                             </td>
@@ -98,19 +103,19 @@
                             <td>1/6/23</td>
                             <td>1/6/23</td>
                             <td>
-                                <a class="btn-small waves-effect waves-light blue" href="item.html">
+                                <a class="btn-small waves-effect waves-light blue" href="/list/item">
                                     <i class="material-icons right">edit</i>
                                     Info/Edit
                                 </a>
-                                <a class="btn-small waves-effect waves-light green" href="list.html">
+                                <a class="btn-small waves-effect waves-light green" href="/list">
                                     <i class="material-icons right">done</i>
                                     Done
                                 </a>
-                                <a class="btn-small waves-effect waves-light orange" href="list.html">
+                                <a class="btn-small waves-effect waves-light orange" href="/list">
                                     <i class="material-icons right">archive</i>
                                     Archive
                                 </a>
-                                <a class="btn-small waves-effect waves-light red" href="list.html">
+                                <a class="btn-small waves-effect waves-light red" href="/list">
                                     <i class="material-icons">delete</i>
                                 </a>
                             </td>
@@ -118,7 +123,7 @@
                         <tr>
                             <td>
                                 <label>
-                                    <input type="checkbox" class="filled-in"/>
+                                    <input type="checkbox" class="filled-in" />
                                     <span></span>
                                 </label>
                             </td>
@@ -128,19 +133,19 @@
                             <td>1/5/23</td>
                             <td>1/6/23</td>
                             <td>
-                                <a class="btn-small waves-effect waves-light blue" href="item.html">
+                                <a class="btn-small waves-effect waves-light blue" href="/list/item">
                                     <i class="material-icons right">edit</i>
                                     Info/Edit
                                 </a>
-                                <a class="btn-small waves-effect waves-light green" href="list.html">
+                                <a class="btn-small waves-effect waves-light green" href="/list">
                                     <i class="material-icons right">done</i>
                                     Done
                                 </a>
-                                <a class="btn-small waves-effect waves-light orange" href="list.html">
+                                <a class="btn-small waves-effect waves-light orange" href="/list">
                                     <i class="material-icons right">archive</i>
                                     Archive
                                 </a>
-                                <a class="btn-small waves-effect waves-light red" href="list.html">
+                                <a class="btn-small waves-effect waves-light red" href="/list">
                                     <i class="material-icons">delete</i>
                                 </a>
                             </td>
@@ -148,7 +153,7 @@
                         <tr>
                             <td>
                                 <label>
-                                    <input type="checkbox" class="filled-in"/>
+                                    <input type="checkbox" class="filled-in" />
                                     <span></span>
                                 </label>
                             </td>
@@ -158,20 +163,20 @@
                             <td>1/12/23</td>
                             <td>1/13/23</td>
                             <td>
-                                
-                                <a class="btn-small waves-effect waves-light blue" href="item.html">
+
+                                <a class="btn-small waves-effect waves-light blue" href="/list/item">
                                     <i class="material-icons right">edit</i>
                                     Info/Edit
                                 </a>
-                                <a class="btn-small waves-effect waves-light green" href="list.html">
+                                <a class="btn-small waves-effect waves-light green" href="/list">
                                     <i class="material-icons right">done</i>
                                     Done
                                 </a>
-                                <a class="btn-small waves-effect waves-light orange" href="list.html">
+                                <a class="btn-small waves-effect waves-light orange" href="/list">
                                     <i class="material-icons right">archive</i>
                                     Archive
                                 </a>
-                                <a class="btn-small waves-effect waves-light red" href="list.html">
+                                <a class="btn-small waves-effect waves-light red" href="/list">
                                     <i class="material-icons">delete</i>
                                 </a>
                             </td>

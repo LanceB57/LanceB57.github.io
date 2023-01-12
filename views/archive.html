@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,8 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/stylesheets/listStyle.css">
+    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico">
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
@@ -14,27 +17,29 @@
     <title>To-Do List</title>
 </head>
 <style>
-    td, th {
+    td,
+    th {
         text-align: center;
     }
 </style>
+
 <body>
     <div class="container">
         <div class="section" id="archiveList">
-            <h1>Archive</h1> 
+            <h1>Archive</h1>
             <div class="row">
-                <a class="btn waves-effect waves-light" href="list.html">
+                <a class="btn waves-effect waves-light" href="/list">
                     <i class="material-icons left">arrow_back</i>
                     Return to Assignments
                 </a>
-            </div>     
+            </div>
 
             <ul id="sort-dropdown" class="dropdown-content">
                 <li><a href="">Priority</a></li>
                 <li><a href="">Finish By</a></li>
                 <li><a href="">Due Date</a></li>
             </ul>
-            
+
 
             <div class="section" id="assignmentTable">
                 <table>
@@ -46,10 +51,10 @@
                             <th>Finish By</th>
                             <th>Due Date</th>
                             <td>
-                                    <a class="btn-small dropdown-button" href="#" data-activates="sort-dropdown">
-                                        <i class="material-icons right">expand_more</i>
-                                        Sort By
-                                    </a>
+                                <a class="btn-small dropdown-button" href="" data-activates="sort-dropdown">
+                                    <i class="material-icons right">expand_more</i>
+                                    Sort By
+                                </a>
                             </td>
                         </tr>
                     </thead>
@@ -61,11 +66,11 @@
                             <td>12/22/23</td>
                             <td>12/23/23</td>
                             <td>
-                                <a class="btn-small waves-effect waves-light orange" href="archive.html">
+                                <a class="btn-small waves-effect waves-light orange" href="/archive">
                                     <i class="material-icons right">unarchive</i>
                                     Un-archive
                                 </a>
-                                <a class="btn-small waves-effect waves-light red" href="archive.html">
+                                <a class="btn-small waves-effect waves-light red" href="/archive">
                                     <i class="material-icons">delete</i>
                                 </a>
                             </td>
