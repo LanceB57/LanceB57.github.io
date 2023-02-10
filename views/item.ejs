@@ -28,33 +28,36 @@
 
         </div>
         <div class="section" title="assignment_info">
-            <form>
+            <form method="post" action=<%="/list/item/" + item.id + "/update" %>>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="titleInput" type="text" class="validate" value="Worksheet" required>
+                        <input id="titleInput" name="title" type="text" class="validate" value=<%=item.title%> required>
                         <label for="titleInput">Assignment Title</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="subjectInput" type="text" class="validate" value="Econ" required>
+                        <input id="subjectInput" name="subject" type="text" class="validate" value=<%=item.subject%>>
                         <label for="subjectInput">Subject</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s2">
-                        <input id="priorityInput" type="number" class="validate" min="0" value="3" required>
+                        <input id="priorityInput" name="priority" type="number" class="validate" min="0"
+                            value=<%=item.priority%>>
                         <label for="priorityInput">Priority</label>
                     </div>
                     <div class="input-field col s5">
-                        <input id="finishInput" type="date" class="datepicker" value="01/09/23" required>
+                        <input id="finishInput" name="finish" type="date" class="datepicker"
+                            value=<%=moment(item.finish_by).format("MM/DD/YYYY")%>>
                         <label for="finishInput">Finish By</label>
                     </div>
                     <div class="input-field col s5">
-                        <input id="dueInput" type="date" class="datepicker" value="01/12/23" required>
+                        <input id="dueInput" name="due" type="date" class="datepicker"
+                            value=<%=moment(item.due_date).format("MM/DD/YYYY")%>>
                         <label for="dueInput">Due Date</label>
                     </div>
                     <div class="input-field col s12">
-                        <input id="descriptionInput" type="text" class="validate"
-                            value="Chapter 17 worksheet on Schoology." required>
+                        <input id="descriptionInput" name="description" type="text" class="validate"
+                            value=<%=item.description%>>
                         <label for="dueInput">Description</label>
                     </div>
                 </div>

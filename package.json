@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "initdb": "node db/db_init.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,10 @@
   "homepage": "https://github.com/LanceB57/LanceB57.github.io#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "helmet": "^6.0.1",
+    "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "mysql2": "^3.0.1"
   }
