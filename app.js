@@ -4,7 +4,7 @@ const logger = require("morgan");
 const app = express();
 const moment = require("moment");
 const helmet = require("helmet");
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 
 // database connection
 const db = require("./db/db_pool");
