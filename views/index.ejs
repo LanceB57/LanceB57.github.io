@@ -17,13 +17,58 @@
 </head>
 
 <body>
+    <!-- Nav bar -->
+    <header>
+        <nav>
+            <div class="nav-wrapper teal lighten-1">
+                <a href="/" class="brand-logo">To-Do Manager</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <!-- Main nav, hidden for small screens -->
+                <ul id="desktop-nav" class="right hide-on-med-and-down">
+                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                    <li><a href="/list"><i class="material-icons left">list</i>To-Do List</a></li>
+                    <li><a href="/archive"><i class="material-icons left">archive</i>Archive</a></li>
+                    <% if(isLoggedIn) { %>
+                        <li><a href="/logout" class="btn red">Logout</a></li>
+                    <%} else {%>
+                        <li><a href="/login" class="btn blue">Login</a></li>
+                    <%}%>
+                </ul>
+            </div>
+        </nav>
+        <!-- Mobile nav menu, shown when menu button clicked -->
+        <ul id="mobile-nav" class="sidenav">
+            <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+            <li><a href="/list"><i class="material-icons left">list</i>To-Do List</a></li>
+            <li><a href="/archive"><i class="material-icons left">archive</i>Archive</a></li>
+            <% if(isLoggedIn) { %>
+                <li><a href="/logout" class="btn red">Logout</a></li>
+            <%} else {%>
+                <li><a href="/login" class="btn blue">Login</a></li>
+            <%}%>
+        </ul>
+    </header>
+
+    <br>
+    
     <div class="container">
-        <h1>Welcome!</h1>
-        <img src="/images/note.jpeg">
-        <h3>Use this app to keep track of your to-do list.</h3>
-        <a class="btn" href="/list">
-            ACCESS YOUR TO-DO LIST
-        </a>
+        <center>
+            <img src="/images/note.jpeg">
+            <% if(isLoggedIn) { %>
+                <h1>
+                    Welcome <%=user.name%>!
+                </h1>
+            <%} else {%>
+                <h1>
+                    Welcome!
+                </h1>
+            <%}%>
+            <h3>
+                Use this app to access your to-do list.
+                Navigate this website using the navbar at the top of the page.
+            </h3>
+        </center>
+        
     </div>
 </body>
 

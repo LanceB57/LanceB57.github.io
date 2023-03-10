@@ -16,6 +16,7 @@ const create_list_table_sql = `
         due_date DATE,
         description VARCHAR(150),
         archived BOOL DEFAULT FALSE,
+        user_id VARCHAR(50) NULL,
         PRIMARY KEY (id)
     );
 `

@@ -11,13 +11,44 @@
     <link rel="stylesheet" href="/stylesheets/listStyle.css">
     <link rel="shortcut icon" type="image/ico" href="../images/favicon.ico">
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <title>Assignment</title>
 </head>
 
 <body>
+    <!-- Nav bar -->
+    <header>
+        <nav>
+            <div class="nav-wrapper teal lighten-1">
+                <a href="/" class="brand-logo">To-Do Manager</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <!-- Main nav, hidden for small screens -->
+                <ul id="desktop-nav" class="right hide-on-med-and-down">
+                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                    <li><a href="/list"><i class="material-icons left">list</i>To-Do List</a></li>
+                    <li><a href="/archive"><i class="material-icons left">archive</i>Archive</a></li>
+                    <% if(isLoggedIn) { %>
+                        <li><a href="/logout" class="btn red">Logout</a></li>
+                    <%} else {%>
+                        <li><a href="/login" class="btn blue">Login</a></li>
+                    <%}%>
+                </ul>
+            </div>
+        </nav>
+        <!-- Mobile nav menu, shown when menu button clicked -->
+        <ul id="mobile-nav" class="sidenav">
+            <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+            <li><a href="/list"><i class="material-icons left">list</i>To-Do List</a></li>
+            <li><a href="/archive"><i class="material-icons left">archive</i>Archive</a></li>
+            <% if(isLoggedIn) { %>
+                <li><a href="/logout" class="btn red">Logout</a></li>
+            <%} else {%>
+                <li><a href="/login" class="btn blue">Login</a></li>
+            <%}%>
+        </ul>
+    </header>
+
     <div class="container">
         <div class="section" title="header">
             <h1>Assignment Details</h1>
@@ -31,11 +62,11 @@
             <form method="post" action=<%="/list/item/" + item.id + "/update" %>>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="titleInput" name="title" type="text" class="validate" value=<%=item.title%> required>
+                        <input id="titleInput" name="title" type="text" class="validate" value="<%=item.title%>" required>
                         <label for="titleInput">Assignment Title</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="subjectInput" name="subject" type="text" class="validate" value=<%=item.subject%>>
+                        <input id="subjectInput" name="subject" type="text" class="validate" value="<%=item.subject%>"">
                         <label for="subjectInput">Subject</label>
                     </div>
                 </div>
@@ -47,17 +78,17 @@
                     </div>
                     <div class="input-field col s5">
                         <input id="finishInput" name="finish" type="date" class="datepicker"
-                            value=<%=moment(item.finish_by).format("MM/DD/YYYY")%>>
+                            value=<%=item.finish_by%>>
                         <label for="finishInput">Finish By</label>
                     </div>
                     <div class="input-field col s5">
                         <input id="dueInput" name="due" type="date" class="datepicker"
-                            value=<%=moment(item.due_date).format("MM/DD/YYYY")%>>
+                            value=<%=item.due_date%>>
                         <label for="dueInput">Due Date</label>
                     </div>
                     <div class="input-field col s12">
                         <input id="descriptionInput" name="description" type="text" class="validate"
-                            value=<%=item.description%>>
+                            value="<%=item.description%>">
                         <label for="dueInput">Description</label>
                     </div>
                 </div>
