@@ -21,7 +21,11 @@
     <header>
         <nav>
             <div class="nav-wrapper teal lighten-1">
-                <a href="/" class="brand-logo">To-Do Manager</a>
+                <%if (isLoggedIn){ %>
+                    <a href="/" class="brand-logo"><%=user.name%>'s To-Do Manager</a>
+                <%} else {%>
+                    <a href="/" class="brand-logo">To-Do Manager</a>
+                <%}%>
                 <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <!-- Main nav, hidden for small screens -->
                 <ul id="desktop-nav" class="right hide-on-med-and-down">
