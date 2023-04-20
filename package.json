@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "devstart": "nodemon -e js,ejs,sql,env app.js",
     "initdb": "node db/db_init.js"
   },
   "repository": {
@@ -26,5 +27,8 @@
     "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "mysql2": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }

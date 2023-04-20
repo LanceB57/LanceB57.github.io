@@ -31,6 +31,7 @@
                 <ul id="desktop-nav" class="right hide-on-med-and-down">
                     <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
                     <li><a href="/list"><i class="material-icons left">list</i>To-Do List</a></li>
+                    <li><a href="/subjects"><i class="material-icons left">dataset</i>Subjects</a></li>
                     <li><a href="/archive"><i class="material-icons left">archive</i>Archive</a></li>
                     <% if(isLoggedIn) { %>
                         <li><a href="/logout" class="btn red">Logout</a></li>
@@ -44,6 +45,7 @@
         <ul id="mobile-nav" class="sidenav">
             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
             <li><a href="/list"><i class="material-icons left">list</i>To-Do List</a></li>
+            <li><a href="/subjects"><i class="material-icons left">dataset</i>Subjects</a></li>
             <li><a href="/archive"><i class="material-icons left">archive</i>Archive</a></li>
             <% if(isLoggedIn) { %>
                 <li><a href="/logout" class="btn red">Logout</a></li>
@@ -70,8 +72,19 @@
                         <label for="titleInput">Assignment Title</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="subjectInput" name="subject" type="text" class="validate" value="<%=item.subject%>"">
+                        <!-- <input id="subjectInput" name="subject_id" type="text" class="validate" value="<%=item.subject_title%>"> -->
+                        <select name="subject" id="subjectInput">
+                            <option value="<%=item.subject_id%>" disabled selected><%=item.subject_title%></option>
+                            <%for(let i = 0; i < subjects.length; i++){%>
+                                <%if(subjects[i].subject_id != item.subject_id){%>
+                                    <option value="<%=subjects[i].subject_id%>">
+                                        <%=subjects[i].subject_title%>
+                                    </option>
+                                <%}%>     
+                            <%}%>
+                        </select>
                         <label for="subjectInput">Subject</label>
+                        
                     </div>
                 </div>
                 <div class="row">
@@ -93,7 +106,7 @@
                     <div class="input-field col s12">
                         <input id="descriptionInput" name="description" type="text" class="validate"
                             value="<%=item.description%>">
-                        <label for="dueInput">Description</label>
+                        <label for="descriptionInput">Description</label>
                     </div>
                 </div>
                 <div class="row">
@@ -106,6 +119,7 @@
             </form>
         </div>
     </div>
+    <script src="/scripts/init.js"></script>
 </body>
 
 </html>

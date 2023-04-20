@@ -9,10 +9,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="/stylesheets/listStyle.css">
-    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
     <title>To-Do List</title>
 </head>
 <style>
@@ -37,6 +36,7 @@
                 <ul id="desktop-nav" class="right hide-on-med-and-down">
                     <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
                     <li><a href="/list"><i class="material-icons left">list</i>To-Do List</a></li>
+                    <li><a href="/subjects"><i class="material-icons left">dataset</i>Subjects</a></li>
                     <li><a href="/archive"><i class="material-icons left">archive</i>Archive</a></li>
                     <% if(isLoggedIn) { %>
                         <li><a href="/logout" class="btn red">Logout</a></li>
@@ -50,6 +50,7 @@
         <ul id="mobile-nav" class="sidenav">
             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
             <li><a href="/list"><i class="material-icons left">list</i>To-Do List</a></li>
+            <li><a href="/subjects"><i class="material-icons left">dataset</i>Subjects</a></li>
             <li><a href="/archive"><i class="material-icons left">archive</i>Archive</a></li>
             <% if(isLoggedIn) { %>
                 <li><a href="/logout" class="btn red">Logout</a></li>
@@ -62,19 +63,6 @@
     <div class="container">
         <div class="section" id="assignmentList">
             <h1>To-Do List</h1>
-            <div class="row">
-                <a class="btn waves-effect waves-light" href="/archive">
-                    <i class="material-icons right">arrow_forward</i>
-                    Go To Archive
-                </a>
-            </div>
-
-            <ul id="sort-dropdown" class="dropdown-content">
-                <li><a href="">Priority</a></li>
-                <li><a href="">Finish By</a></li>
-                <li><a href="">Due Date</a></li>
-            </ul>
-
 
             <div class="section" id="assignmentTable">
                 <table>
@@ -107,7 +95,7 @@
                                     <%=inventory[i].title%>
                                 </td>
                                 <td>
-                                    <%=inventory[i].subject%>
+                                    <%=inventory[i].subject_title%>
                                 </td>
                                 <td>
                                     <%=inventory[i].priority%>
@@ -152,7 +140,14 @@
                         <label for="titleInput">Assignment Title</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="subjectInput" name="subject" type="text" class="validate">
+                        <select name="subject" id="subjectInput">
+                            <option value="" disabled selected>Choose your option</option>
+                            <%for(let i = 0; i < subjects.length; i++){%>
+                                <option value="<%=subjects[i].subject_id%>">
+                                    <%=subjects[i].subject_title%>
+                                </option>
+                            <%}%>
+                        </select>
                         <label for="subjectInput">Subject</label>
                     </div>
                 </div>
@@ -183,6 +178,7 @@
             </form>
         </div>
     </div>
+    <script src="/scripts/init.js"></script>
 </body>
 
 </html>

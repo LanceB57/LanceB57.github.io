@@ -71,11 +71,22 @@ app.get("/", (req, res) => {
 // get list
 const read_list_info_sql = `
     SELECT 
-        id, title, subject, priority, finish_by, due_date 
+        id, title, subjects.subject_title AS subject_title, priority, finish_by, due_date 
     FROM 
         list
+    JOIN
+        subjects ON list.subject_id = subjects.subject_id
     WHERE
-        archived = 0 AND user_id = ?;`;
+        archived = 0 AND list.user_id = ?;`;
+
+const read_subject_info_sql = `
+    SELECT
+        subject_id, subject_title
+    FROM
+        subjects
+    WHERE
+        user_id = ?;
+`
 
 app.get("/list", requiresAuth(), (req, res) => {
     db.execute(read_list_info_sql, [req.oidc.user.email], (error, results) => {
@@ -83,7 +94,14 @@ app.get("/list", requiresAuth(), (req, res) => {
             res.status(500).send(error);
         }
         else{
-            res.render("list", {moment : moment, inventory : results});
+            db.execute(read_subject_info_sql, [req.oidc.user.email], (error2, results2) => {
+                if(error){
+                    res.status(500).send(error);
+                }
+                else{
+                    res.render("list", {moment : moment, inventory : results, subjects : results2});
+                }
+            })
         }
     });
 });
@@ -91,11 +109,13 @@ app.get("/list", requiresAuth(), (req, res) => {
 // get archive
 const read_archived_info_sql = `
     SELECT 
-        id, title, subject, priority, finish_by, due_date 
+        id, title, subjects.subject_title AS subject_title, priority, finish_by, due_date 
     FROM 
         list
+    JOIN
+        subjects ON list.subject_id = subjects.subject_id
     WHERE
-        archived = 1 AND user_id = ?;`;
+        archived = 1 AND list.user_id = ?;`;
 
 app.get("/archive", requiresAuth(), (req, res) => {
     db.execute(read_archived_info_sql, [req.oidc.user.email], (error, results) => {
@@ -103,7 +123,14 @@ app.get("/archive", requiresAuth(), (req, res) => {
             res.status(500).send(error);
         }
         else{
-            res.render("archive", {moment : moment, inventory : results});
+            db.execute(read_subject_info_sql, [req.oidc.user.email], (error2, results2) => {
+                if(error){
+                    res.status(500).send(error);
+                }
+                else{
+                    res.render("archive", {moment : moment, inventory : results, subjects : results2});
+                }
+            })
         }
     });
 });
@@ -111,12 +138,14 @@ app.get("/archive", requiresAuth(), (req, res) => {
 
 
 const read_item_info_sql = `
-    SELECT 
-        id, title, subject, priority, finish_by, due_date, description, archived 
+SELECT 
+        id, title, subjects.subject_title AS subject_title, priority, finish_by, due_date , description, archived
     FROM 
         list
+    JOIN
+        subjects ON list.subject_id = subjects.subject_id
     WHERE
-        id = ? AND user_id = ?;`;
+        archived = 0 AND list.id = ? AND list.user_id = ?;`
 
 // item
 app.get("/list/item/:id", requiresAuth(), (req, res) => {
@@ -128,11 +157,18 @@ app.get("/list/item/:id", requiresAuth(), (req, res) => {
             res.status(404).send(`No item found with id = '${req.params.id}'`);
         }
         else{
-            let data = results[0];
-            data.due_date = moment(data.due_date).format('YYYY-MM-DD');
-            data.finish_by = moment(data.finish_by).format('YYYY-MM-DD');
-            console.log(data.due_date);
-            res.render("item", {item : data});
+            
+            db.execute(read_subject_info_sql, [req.oidc.user.email], (error2, results2) => {
+                if(error){
+                    res.status(500).send(error);
+                }
+                else{
+                    const data = results[0];
+                    data.due_date = moment(data.due_date).format('YYYY-MM-DD');
+                    data.finish_by = moment(data.finish_by).format('YYYY-MM-DD');
+                    res.render("item", {item : data, subjects : results2});
+                }
+            })
         }
     });
 });
@@ -177,7 +213,7 @@ app.get("/list/item/:id/delete/archive", requiresAuth(), (req, res) => {
 // create new items
 const create_item_sql = `
     INSERT INTO list
-        (title, subject, priority, finish_by, due_date, description, user_id)
+        (title, subject_id, priority, finish_by, due_date, description, user_id)
     VALUES
         (?, ?, ?, ?, ?, ?, ?);`;
 
@@ -200,13 +236,13 @@ const update_item_sql = `
     UPDATE list
     SET
         title = ?,
-        subject = ?,
+        subject_id = ?,
         priority = ?,
         finish_by = ?,
         due_date = ?,
         description = ?
     WHERE
-        id = ? AND user_id = ?`
+        id = ? AND user_id = ?`;
 
 app.post("/list/item/:id/update", requiresAuth(), (req, res) => {
     db.execute(update_item_sql, [req.body.title, req.body.subject, req.body.priority, 
@@ -228,7 +264,7 @@ const archive_item_sql = `
     SET
         archived = 1
     WHERE
-        id = ? AND user_id = ?`
+        id = ? AND user_id = ?`;
 
 app.get("/list/item/:id/archive", requiresAuth(), (req, res) => {
     db.execute(archive_item_sql, [req.params.id, req.oidc.user.email], (error, results) => {
@@ -242,22 +278,74 @@ app.get("/list/item/:id/archive", requiresAuth(), (req, res) => {
     });
 });
 
-// unarchive
+// get subjects
 const unarchive_item_sql = `
     UPDATE list
     SET
         archived = FALSE
     WHERE
-        id = ? AND user_id = ?`
+        id = ? AND user_id = ?`;
 
 app.get("/list/item/:id/unarchive", requiresAuth(), (req, res) => {
-    db.execute(unarchive_item_sql, [req.params.id, req.oidc.user], (error, results) => {
+    db.execute(unarchive_item_sql, [req.params.id, req.oidc.user.email], (error, results) => {
         if(error){
             console.log(req);
             res.status(500).send(error);
         }
         else{
             res.redirect("/archive");
+        }
+    });
+});
+
+app.get("/subjects", requiresAuth(), (req, res) => {
+    db.execute(read_subject_info_sql, [req.oidc.user.email], (error, results) => {
+        if(error){
+            console.log(req);
+            res.status(500).send(error);
+        }
+        else{
+            res.render("subjects", {subjects : results});
+        }
+    });
+});
+
+const create_subject_sql = `
+    INSERT INTO subjects
+            (subject_title, user_id)
+        VALUES
+            (?, ?);
+`;
+app.post("/subjects", requiresAuth(), (req, res) => {
+    db.execute(create_subject_sql, [req.body.subject_title, req.oidc.user.email], 
+        (error, results) => {
+        if(error){
+            console.log(req);
+            res.status(500).send(error);
+        }
+        else{
+            res.redirect("/subjects");
+        }
+    });
+});
+
+const delete_subject_sql = `
+    DELETE
+    FROM 
+        subjects
+    WHERE
+        subject_id = ? AND user_id = ?
+`;
+app.get("/subjects/subject/:id/delete", requiresAuth(), (req, res) => {
+    db.execute(delete_subject_sql, [req.params.id, req.oidc.user.email], (error, results) => {
+        if(error){
+            res.status(500).send(error);
+        }
+        else if(results.length === 0){
+            res.status(404).send(`No item found with id = '${req.params.id}'`);
+        }
+        else{
+            res.redirect("/subjects")
         }
     });
 });

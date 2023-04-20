@@ -9,15 +9,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="/stylesheets/listStyle.css">
-    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="/images/favicon.ico">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
     <title>Subjects</title>
 </head>
 <style>
-    td,
-    th {
+    th,
+    td {
         text-align: center;
     }
 </style>
@@ -62,67 +61,21 @@
     </header>
 
     <div class="container">
-        <div class="section" id="archiveList">
-            <h1>Archive</h1>
-            <div class="row">
-                <a class="btn waves-effect waves-light" href="/list">
-                    <i class="material-icons left">arrow_back</i>
-                    Return to Assignments
-                </a>
-            </div>
+        <div class="section" id="assignmentList">
+            <h1>Subjects List</h1>
 
-            <ul id="sort-dropdown" class="dropdown-content">
-                <li><a href="">Priority</a></li>
-                <li><a href="">Finish By</a></li>
-                <li><a href="">Due Date</a></li>
-            </ul>
-
-
-            <div class="section" id="assignmentTable">
+            <div class="section" id="subjectTable">
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Assignment</th>
-                            <th>Subject</th>
-                            <th>Priority</th>
-                            <th>Finish By</th>
-                            <th>Due Date</th>
-                            <!-- <td>
-                                <a class="btn-small dropdown-button" href="" data-activates="sort-dropdown">
-                                    <i class="material-icons right">expand_more</i>
-                                    Sort By
-                                </a>
-                            </td> -->
-                        </tr>
-                    </thead>
                     <tbody>
-                        <% for (let i=0; i < inventory.length; i++){ %>
+                        <% for (let i=0; i < subjects.length; i++) { %>
                             <tr>
                                 <td>
-                                    <%=inventory[i].title%>
+                                    <%=subjects[i].subject_title%>
                                 </td>
                                 <td>
-                                    <%=inventory[i].subject_title%>
-                                </td>
-                                <td>
-                                    <%=inventory[i].priority%>
-                                </td>
-                                <td>
-                                    <%= moment(inventory[i].finish_by).format("MM/DD/YYYY") %>
-                                </td>
-                                <td>
-                                    <%= moment(inventory[i].due_date).format("MM/DD/YYYY") %>
-                                </td>
-                                </td>
-                                <td>
-                                    <a class="btn-small waves-effect waves-light orange" href=<%="/list/item/" +
-                                        inventory[i].id + "/unarchive" %>>
-                                        <i class="material-icons right">unarchive</i>
-                                        Un-archive
-                                    </a>
-                                    <a class="btn-small waves-effect waves-light red" href=<%="/list/item/" +
-                                        inventory[i].id + "/delete/archive" %>>
-                                        <i class="material-icons">delete</i>
+                                    <a class="btn-small waves-effect waves-light red" href=<%="/subjects/subject/" +
+                                        subjects[i].subject_id + "/delete" %>>
+                                        <i class=" material-icons">delete</i>
                                     </a>
                                 </td>
                             </tr>
@@ -130,6 +83,21 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="section" id="subjectAdd">
+            <h1>Add a new subject!</h1>
+            <form method="post" action="/subjects">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="inputTitle" name="subject_title" type="text" class="validate">
+                        <label for="inputTitle">Subject Title</label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit">
+                    <i class="material-icons right">send</i>
+                    Submit
+                </button>
+            </form>
         </div>
     </div>
     <script src="/scripts/init.js"></script>
